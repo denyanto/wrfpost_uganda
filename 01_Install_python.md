@@ -54,10 +54,18 @@
    ```console
    >> exit
    ```
-5. Install python
+5. Install python and the modules
    ```console
    >> conda create -n wrfpostpy python netCDF4 cartopy
    >> conda activate wrfpostpy
+   ```
+   Activating wrfpostpy!
+   ```console   
+   (base) [trainer@litbang-master ~]$ conda activate wrfpostpy
+   (wrfpostpy) [trainer@litbang-master ~]$
+   ```
+   Installing wrf-python module!
+   ```console   
    >> pip install wrf-python
    ```
 
