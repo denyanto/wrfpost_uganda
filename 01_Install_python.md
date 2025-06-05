@@ -56,7 +56,7 @@
    ```
 5. Install python and the modules
    ```console
-   >> conda create -n wrfpostpy python netCDF4 cartopy
+   >> conda create -n wrfpostpy python=3.12 netCDF4 cartopy
    >> conda activate wrfpostpy
    ```
    Activating wrfpostpy!
@@ -66,7 +66,7 @@
    ```
    Installing wrf-python module!
    ```console   
-   >> pip install wrf-python
+   >> conda install conda-forge::wrf-python
    ```
 
 6. Finish
