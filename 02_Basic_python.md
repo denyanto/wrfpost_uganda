@@ -272,14 +272,89 @@
 13. Python Functions
 
     A function is a block of code which only runs when it is called. You can pass data, known as parameters, into a function. A function can return data as a result.
+
+    In Python a function is defined using the def keyword:
     ```console
+    def my_function():
+       print("Hello from a function")
+    ```
+    To call a function, use the function name followed by parenthesis:
+    ```console
+    def my_function():
+       print("Hello from a function")
+    
+    my_function()
+    ```
+    Information can be passed into functions as arguments.
+
+    Arguments are specified after the function name, inside the parentheses. You can add as many arguments as you want, just separate them with a comma.
+
+    The following example has a function with one argument (fname). When the function is called, we pass along a first name, which is used inside the function to print the full name:
+    ```console
+    def my_function(fname):
+       print(fname + " Good")
+    
+    my_function("Mac")
+    my_function("Linux")
+    my_function("Windows")
+    ```
+    By default, a function must be called with the correct number of arguments. Meaning that if your function expects 2 arguments, you have to call the function with 2 arguments, not more, and not less.
+        ```console
+    def my_function(fname, lname):
+       print(fname + " " + lname)
+    
+    my_function("Mac", "Linux")
+    ```
+14. Python Arrays
+
+    Arrays are used to store multiple values in one single variable:
+    ```console
+    cars = ["Audi", "Ford", "Volvo", "BMW"]
+
+    print(cars)
+    ```
+    An array is a special variable, which can hold more than one value at a time. If you have a list of items (a list of car names, for example), storing the cars in single variables could look like this:
+    ```console
+    car1 = "Ford"
+    car2 = "Volvo"
+    car3 = "BMW"
+    ```
+    However, what if you want to loop through the cars and find a specific one? And what if you had not 3 cars, but 300? The solution is an array! An array can hold many values under a single name, and you can access the values by referring to an index number.
+15. Python Dates
+    
+    A date in Python is not a data type of its own, but we can import a module named datetime to work with dates as date objects.
+
+    Import the datetime module and display the current date:
+    ```console
+    import datetime
+
+    x = datetime.datetime.now()
+    print(x)
+    ```
+    When we execute the code from the example above the result will be:
+
+    2025-06-05 14:12:08.400933
+    The date contains year, month, day, hour, minute, second, and microsecond.
    
-    ```
-14. Python 
-
+    The datetime module has many methods to return information about the date object.
+   
+    Here are a few examples, you will learn more about them later in this chapter:
     ```console
+    import datetime
+   
+    x = datetime.datetime.now()
+   
+    print(x.year)
+    print(x.strftime("%A"))
     ```
-15. Python 
+    To create a date, we can use the datetime() class (constructor) of the datetime module.
 
+    The datetime() class requires three parameters to create a date: year, month, day.
     ```console
+    import datetime
+
+    x = datetime.datetime(2020, 5, 17)
+   
+    print(x)
     ```
+
