@@ -39,10 +39,119 @@
    # Close the file
    ncfile.close()
    ```
-2. Visualising the 
+2. Visualising the Temperature 2 m
+   ![plot1](https://github.com/user-attachments/assets/8d563c2c-20f5-49f6-b10a-c41badeec1fe)
 
-3. Visualising the 
+   Create a file plot2.py with this example:
+   ```console
+   import netCDF4
+   import wrf
+   import matplotlib.pyplot as plt
+   from matplotlib.cm import get_cmap
+   import cartopy.crs as ccrs
+   import numpy as np
+   
+   # Load the NetCDF file using netCDF4
+   ncfile = netCDF4.Dataset('wrfoutput/wrfout_d01_2020-01-01_00:00:00')
+   
+   # Extract a variable (e.g., temperature 2 m, 't2m')
+   t2 = wrf.getvar(ncfile, 'T2', timeidx=0)
+   
+   # Get lat/lon coordinates and map projection
+   lats, lons = wrf.latlon_coords(t2)
+   cart_proj = wrf.get_cartopy(t2)
+   
+   # Create the plot
+   fig = plt.figure(figsize=(10, 8))
+   ax = plt.axes(projection=cart_proj)
+   
+   # Plot contours
+   plt.contourf(wrf.to_np(lons), wrf.to_np(lats), wrf.to_np(t2), 10, 
+                   transform=ccrs.PlateCarree(), cmap=get_cmap("Reds"))
+   
+   # Add a color bar
+   cbar = plt.colorbar(ax=ax, shrink=.62)
+   cbar.set_label(t2.units)
+   
+   # Add coastlines, gridlines, and title
+   ax.coastlines()
+   gl=ax.gridlines(crs=ccrs.PlateCarree(),draw_labels=True,color='black',alpha=0.5,linestyle='--')
+   plt.title(t2.description+'\n'+str(t2.Time.values))
+  
+   # Save the plot
+   plt.savefig('plot2.png')
+  
+   # Close the file
+   ncfile.close()
+   ```
+3. Visualising the WRF Domain
+   ![plot1](https://github.com/user-attachments/assets/2347f977-3beb-48e5-970e-57584450194d)
 
+   Create a file plot3.py with this example:
+   ```console
+   import netCDF4
+   import wrf
+   import matplotlib.pyplot as plt
+   from matplotlib.cm import get_cmap
+   import matplotlib as mpl
+   import cartopy.crs as ccrs
+   import numpy as np
+   
+   # Load the NetCDF file using netCDF4
+   
+   def get_plot_element(infile):
+       rootgroup = netCDF4.Dataset(infile, 'r')
+       p = wrf.getvar(rootgroup, 'RAINNC')
+       #lats, lons = wrf.latlon_coords(p)
+       cart_proj = wrf.get_cartopy(p)
+       xlim = wrf.cartopy_xlim(p)
+       ylim = wrf.cartopy_ylim(p)
+       rootgroup.close()
+       return cart_proj, xlim, ylim
+    
+   infile_d01 = 'wrfoutput/wrfout_d01_2020-01-01_00:00:00'
+   cart_proj, xlim_d01, ylim_d01 = get_plot_element(infile_d01)
+    
+   infile_d02 = 'wrfoutput/wrfout_d02_2020-01-01_00:00:00'
+   _, xlim_d02, ylim_d02 = get_plot_element(infile_d02)
+    
+   infile_d03 = 'wrfoutput/wrfout_d03_2020-01-01_00:00:00'
+   _, xlim_d03, ylim_d03 = get_plot_element(infile_d03)
+   
+   # Create the plot
+   fig = plt.figure(figsize=(10, 8))
+   ax = plt.axes(projection=cart_proj)
+   
+   ax.coastlines('10m', linewidth=0.8)
+    
+   # d01
+   ax.set_xlim([xlim_d01[0]-(xlim_d01[1]-xlim_d01[0])/15, xlim_d01[1]+(xlim_d01[1]-xlim_d01[0])/15])
+   ax.set_ylim([ylim_d01[0]-(ylim_d01[1]-ylim_d01[0])/15, ylim_d01[1]+(ylim_d01[1]-ylim_d01[0])/15])
+    
+   # d01 box
+   ax.add_patch(mpl.patches.Rectangle((xlim_d01[0], ylim_d01[0]), xlim_d01[1]-xlim_d01[0], ylim_d01[1]-ylim_d01[0],
+                fill=None, lw=3, edgecolor='blue', zorder=10))
+   ax.text(xlim_d01[0]+(xlim_d01[1]-xlim_d01[0])*0.05, ylim_d01[0]+(ylim_d01[1]-ylim_d01[0])*0.9, 'D01',
+           size=15, color='blue', zorder=10)
+    
+   # d02 box
+   ax.add_patch(mpl.patches.Rectangle((xlim_d02[0], ylim_d02[0]), xlim_d02[1]-xlim_d02[0], ylim_d02[1]-ylim_d02[0],
+                fill=None, lw=3, edgecolor='black', zorder=10))
+   ax.text(xlim_d02[0]+(xlim_d02[1]-xlim_d02[0])*0.05, ylim_d02[0]+(ylim_d02[1]-ylim_d02[0])*1.1, 'D02',
+           size=15, color='black', zorder=10)
+    
+   # d03 box
+   ax.add_patch(mpl.patches.Rectangle((xlim_d03[0], ylim_d03[0]), xlim_d03[1]-xlim_d03[0], ylim_d03[1]-ylim_d03[0],
+                fill=None, lw=3, edgecolor='red', zorder=10))
+   ax.text(xlim_d03[0]+(xlim_d03[1]-xlim_d03[0])*0.1, ylim_d03[0]+(ylim_d03[1]-ylim_d03[0])*0.1, 'D03',
+           size=15, color='red', zorder=10)
+   gl = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,
+                        linewidth=1, color='gray', alpha=0.5, linestyle='--') 
+   ax.set_title('WRF nested domain setup', size=20)
+  
+   # Save the plot
+   plt.savefig('plot3.png')
+   ```
 4. Visualising the Wind Speed
    ![plot1](https://github.com/user-attachments/assets/e0977195-3bf2-4cee-8798-78336405fef0)
 
