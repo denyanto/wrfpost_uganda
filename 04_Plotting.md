@@ -1,5 +1,5 @@
 # Simple plotting example
-1. Sea level Pressure
+1. Visualising the Sea level Pressure
    ![plot1](https://github.com/user-attachments/assets/1cfd8627-73d0-401d-9879-f063caf8c4de)
 
    Create a file plot1.py with this example:
@@ -39,9 +39,11 @@
    # Close the file
    ncfile.close()
    ```
-2. 
-3.
-4. Wind Speed
+2. Visualising the 
+
+3. Visualising the 
+
+4. Visualising the Wind Speed
    ![plot1](https://github.com/user-attachments/assets/e0977195-3bf2-4cee-8798-78336405fef0)
 
    Create a file plot5.py with this example:
@@ -88,3 +90,69 @@
    # Close the file
    ncfile.close()
    ```
+5. Another Visualising the Wind
+   ![plot1](https://github.com/user-attachments/assets/db8c88ec-5cc7-4435-84d1-5ccab4a7ece2)
+
+   Create a file plot6.py with this example:
+   ```console
+   import xarray as xr
+   import matplotlib.pyplot as plt
+   import matplotlib.cm as cm
+   from matplotlib.lines import Line2D
+   import numpy as np
+   import cartopy.crs as ccrs
+   import cartopy.feature as cfeature
+   import pandas as pd
+   from cartopy.vector_transform import vector_scalar_to_grid
+   
+   # Load the WRF output file
+   ds = xr.open_dataset('wrfoutput/wrfout_d01_2020-01-01_00:00:00')
+   
+   # Extract the wind speed and direction variables
+   u_wind = ds.U10.values
+   v_wind = ds.V10.values
+   
+   # Calculate the wind speed and direction
+   wind_speed = (u_wind ** 2 + v_wind ** 2) ** 0.5
+   wind_direction = 180 + (180 / np.pi) * np.arctan2(v_wind, u_wind)
+   
+   # Create a map projection
+   proj = ccrs.PlateCarree()
+   # Create a figure and axis object
+   fig, ax = plt.subplots(figsize=(10, 10), subplot_kw=dict(projection=proj))
+   
+   # Set the plot extent
+   ax.set_extent([ds.XLONG.min(), ds.XLONG.max(), ds.XLAT.min(), ds.XLAT.max()])
+   
+   # Add map features
+   ax.add_feature(cfeature.LAND, facecolor='lightgray')
+   ax.add_feature(cfeature.COASTLINE, linewidth=0.5)
+   ax.add_feature(cfeature.BORDERS, linewidth=0.5)
+   
+   # Add the latitude and longitude grid
+   gl = ax.gridlines(crs=proj, draw_labels=True,
+                     linewidth=1, color='gray', alpha=0.5, linestyle='--')
+   gl.top_labels = False
+   gl.right_labels = False
+   
+   # Add the wind vectors
+   new_x, new_y, new_u, new_v,c = vector_scalar_to_grid(proj,proj,15,ds.XLONG.values,ds.XLAT.values,u_wind,v_wind, wind_speed)
+   Q=ax.quiver(new_x,new_y,new_u,new_v,c, transform=proj, regrid_shape=30, cmap='plasma', pivot='middle') 
+   qk = plt.quiverkey(Q, 0.1, 0.2, 10, r'10 m/s', labelpos='E', coordinates='figure')
+   # Add a colorbar
+   cbar = fig.colorbar(Q, orientation='horizontal', fraction=0.05, pad=0.1)
+   cbar.ax.set_xlabel('Wind Speed (m/s)')
+   
+   # Create a string with the title and date information
+   title_str = f'Mean of Wind Speed and Direction'
+   
+   # Add a title
+   plt.title(title_str)
+   
+   # Save the plot
+   plt.savefig('plot6.png')
+   
+   # Close the file
+   ds.close()
+   ```
+7. 
