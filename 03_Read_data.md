@@ -70,3 +70,4 @@
    ```console
    >> python read3.py
    ```
+   For another variables using wrf-python, please read following link: https://wrf-python.readthedocs.io/en/latest/diagnostics.html. 
