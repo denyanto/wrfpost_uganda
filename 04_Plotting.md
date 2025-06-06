@@ -1,5 +1,6 @@
 # Simple plotting example
 1. Sea level Pressure
+   ![plot1](https://github.com/user-attachments/assets/1cfd8627-73d0-401d-9879-f063caf8c4de)
 
    Create a file plot1.py with this example:
    ```console
@@ -25,7 +26,8 @@
   
    # Plot the variable
    plt.contourf(lons, lats, slp, transform=ccrs.PlateCarree(), cmap='jet')
-  
+   cbar = plt.colorbar()
+
    # Add coastlines, gridlines, and title
    ax.coastlines()
    gl=ax.gridlines(crs=ccrs.PlateCarree(),draw_labels=True,color='black',alpha=0.5,linestyle='--')
@@ -40,7 +42,8 @@
 2. 
 3.
 4. Wind Speed
-   
+   ![plot1](https://github.com/user-attachments/assets/e0977195-3bf2-4cee-8798-78336405fef0)
+
    Create a file plot5.py with this example:
    ```console
    from netCDF4 import Dataset
