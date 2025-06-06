@@ -37,4 +37,51 @@
    # Close the file
    ncfile.close()
    ```
-3. 
+2. 
+3.
+4. Wind Speed
+   
+   Create a file plot5.py with this example:
+   ```console
+   from netCDF4 import Dataset
+   import matplotlib.pyplot as plt
+   import cartopy.crs as ccrs
+   from wrf import (getvar, interplevel, to_np, latlon_coords)
+   import numpy as np
+   # read the file
+   path_file='wrfoutput/wrfout_d01_2020-01-01_00:00:00'
+   ncfile = Dataset(path_file)
+   # select your timestep (index) and pressure level
+   i = 0
+   p_level = 500
+   # get the variables
+   p = getvar(ncfile, "pressure", timeidx=i)
+   ua = getvar(ncfile, "ua", units="kt", timeidx=i)
+   va = getvar(ncfile, "va", units="kt", timeidx=i)
+   # interpolate ua and va to pressure level
+   u_500 = interplevel(ua, p, p_level)
+   v_500 = interplevel(va, p, p_level)
+   
+   # get the lat, lon grid
+   lats, lons = latlon_coords(u_500)
+   # specify your colormap and projection
+   cmap = plt.get_cmap('Reds')
+   crs = ccrs.PlateCarree()
+   # plot
+   fig = plt.figure(figsize=(10,6))    
+   ax = fig.add_subplot(111, facecolor='None', projection=crs)
+   ax.coastlines(resolution='10m', alpha=0.5)
+   plot_uv500 = ax.pcolormesh(lons, lats, np.sqrt(u_500**2+v_500**2), cmap=cmap)
+   cbar = fig.colorbar(plot_uv500)
+   cbar.ax.set_ylabel('Wind speed (kts)')
+   # some fancy schmancy grid lines
+   gl = ax.gridlines(crs=crs, draw_labels=True, alpha=0.5)
+   
+   plt.title('Wind Speed 500mb')
+   
+   # Save the plot
+   plt.savefig('plot5.png')
+   
+   # Close the file
+   ncfile.close()
+   ```
