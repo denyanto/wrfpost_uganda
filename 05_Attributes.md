@@ -42,7 +42,7 @@
     ncfile.close()
     ```
 2.  Line Properties:
-    - When using ```plot()```, you can specify line properties such as color, linewidth, linestyle, and marker style.
+    - When using ```plot()```, you can specify line properties such as color, linewidth, [linestyle](https://matplotlib.org/stable/gallery/lines_bars_and_markers/linestyles.html), and [marker](https://matplotlib.org/1.4.1/api/markers_api.html) style. 
     - These can be set directly as keyword arguments in the ```plot()``` function.
     - You can also use ```setp()``` to modify multiple properties of a line or multiple lines at once, such as customizing labels including the tick labels.
     In the example below, ``ax.get_xticklabels()`` grabs the tick labels from the x axis, and then the rotation argument specifies an angle of rotation (e.g. 45), so that the tick labels along the x axis are rotated 45 degrees.
