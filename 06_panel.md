@@ -38,3 +38,9 @@ Here's how you can create panel plots in Python:
    # Display the plot
    plt.show()
    ````
+2. Using Seaborn:
+   - Seaborn is a statistical data visualization library that builds on top of Matplotlib.
+   - It provides functions like ``relplot()``, ``catplot()``, and ``displot()`` for creating panel plots based on data categories.
+   ````console
+
+   ````
