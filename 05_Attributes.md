@@ -41,5 +41,37 @@
     # Close the file
     ncfile.close()
     ```
-2.  Figure Size: Use ``` figure(figsize=(width, height)) ``` to control the size of the plot.
-3.  Show Plot: Use ``` plt.show() ``` to display the plot in an interactive window.
+2.  Line Properties:
+    - When using ```plot()```, you can specify line properties such as color, linewidth, linestyle, and marker style.
+    - These can be set directly as keyword arguments in the ```plot()``` function.
+    - You can also use ```setp()``` to modify multiple properties of a line or multiple lines at once, such as customizing labels including the tick labels.
+    In the example below, ``ax.get_xticklabels()`` grabs the tick labels from the x axis, and then the rotation argument specifies an angle of rotation (e.g. 45), so that the tick labels along the x axis are rotated 45 degrees.
+    ```console
+    import matplotlib.pyplot as plt
+    
+    x = [1, 2, 3]
+    y = [40, 50, 60]
+    
+    plt.plot(x, y, color='red', linewidth=2, linestyle='--', marker='o', label='Line 1')
+    plt.plot(x, [60, 70, 80], color='blue', linewidth=1, linestyle='-', marker='x', label='Line 2')
+    plt.setp(ax.get_xticklabels(), rotation = 45)
+    plt.legend()
+    plt.show()
+    ```
+3.  Legends:
+    - Use ```legend()``` to add a legend to the plot, which helps in distinguishing between different lines or data sets.
+    - You can specify labels for each line in the ```plot()``` function and call ```legend()``` to display them.
+4.  Markers:
+    - Markers can be added to the plot to highlight specific data points.
+    - You can use different shapes and styles for markers by specifying the marker parameter in the ```plot()``` function.
+5.  Axes Customization:
+    - You can set limits, ticks, and labels for both axes.
+    - Use ``ax.set()`` to customize the axes.
+    ````console
+    fig, ax = plt.subplots()
+    ax.plot(x, y)
+    ax.set(title = "Customized Plot", xlabel = "X-axis", ylabel = "Y-axis")
+    plt.show()
+    ````
+6.  Figure Size: Use ``` figure(figsize=(width, height)) ``` to control the size of the plot.
+7.  Show Plot: Use ``` plt.show() ``` to display the plot in an interactive window.
