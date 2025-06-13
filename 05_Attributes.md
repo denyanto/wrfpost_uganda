@@ -1,5 +1,7 @@
 # Adding attribute during plot
-1.  X-label and Y-label
+1.  Labels and Titles:
+    - Use ``` xlabel() ``` to label the x-axis, ``` ylabel() ``` for the y-axis, and ``` title() ``` to set the plot's title.
+    - You can customize the font properties of these labels and titles using the ``` fontdict ``` parameter.
     ```console
     import netCDF4
     import wrf
@@ -28,14 +30,16 @@
     # Add coastlines, gridlines, and title
     ax.coastlines()
     gl=ax.gridlines(crs=ccrs.PlateCarree(),draw_labels=True,color='black',alpha=0.5,linestyle='--')
-    plt.title('Sea Level Pressure (SLP)')
-    plt.xlabel("X-Axis Label")      # adding X-axis label
-    plt.ylabel("Y-Axis Label")      # adding Y-axis label
+    font1 = {'family':'serif','color':'blue','size':20}
+    font2 = {'family':'serif','color':'darkred','size':15}
+    plt.title('Sea Level Pressure (SLP)', fontdict = font1)   # adding a title
+    plt.xlabel("X-Axis Label", fontdict = font2)              # adding X-axis label
+    plt.ylabel("Y-Axis Label", fontdict = font2)              # adding Y-axis label
     # Save the plot
     plt.savefig('plot1.png')
     
     # Close the file
     ncfile.close()
     ```
-2.  Figure Size: Use ```console figure(figsize=(width, height)) ``` to control the size of the plot.
-3.  Show Plot: ```console Use plt.show() ``` to display the plot in an interactive window.
+2.  Figure Size: Use ``` figure(figsize=(width, height)) ``` to control the size of the plot.
+3.  Show Plot: Use ``` plt.show() ``` to display the plot in an interactive window.
