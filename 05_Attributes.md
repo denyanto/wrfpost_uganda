@@ -37,4 +37,5 @@
     # Close the file
     ncfile.close()
     ```
-3. 
+2.  Figure Size: Use ```console figure(figsize=(width, height)) ``` to control the size of the plot.
+3.  Show Plot: ```console Use plt.show() ``` to display the plot in an interactive window.
