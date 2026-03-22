@@ -52,11 +52,9 @@ Here's how you can create panel plots in Python:
    rh = wrf.getvar(ncfile, 'rh2')
    wspd = wrf.getvar(ncfile, 'wspd')
    lats, lons = wrf.latlon_coords(slp)
-   # cart_proj = wrf.get_cartopy(slp)
   
    fig, axes = plt.subplots(2, 2, figsize=(8, 6), subplot_kw={'projection': ccrs.PlateCarree()})
    axes[0, 0].contourf(lons, lats, slp, transform=ccrs.PlateCarree(), cmap='jet')
-   # cbar = plt.colorbar()
    axes[0, 0].set_title('Sea Level Pressure (SLP)')
    axes[0, 0].coastlines()
    gl=axes[0, 0].gridlines(crs=ccrs.PlateCarree(),draw_labels=True,color='black',alpha=0.5,linestyle='--')
@@ -64,7 +62,6 @@ Here's how you can create panel plots in Python:
    gl.right_labels = False
   
    axes[0, 1].contourf(lons, lats, t2m, transform=ccrs.PlateCarree(), cmap='jet')
-   # cbar = plt.colorbar()
    axes[0, 1].set_title('2 meter2 Temperature')
    axes[0, 1].coastlines()
    gl=axes[0, 1].gridlines(crs=ccrs.PlateCarree(),draw_labels=True,color='black',alpha=0.5,linestyle='--')
@@ -72,7 +69,6 @@ Here's how you can create panel plots in Python:
    gl.right_labels = False
   
    axes[1, 0].contourf(lons, lats, rh, transform=ccrs.PlateCarree(), cmap='jet')
-   # cbar = plt.colorbar()
    axes[1, 0].set_title('Relative Humidity')
    axes[1, 0].coastlines()
    gl=axes[1, 0].gridlines(crs=ccrs.PlateCarree(),draw_labels=True,color='black',alpha=0.5,linestyle='--')
@@ -80,7 +76,6 @@ Here's how you can create panel plots in Python:
    gl.right_labels = False
   
    axes[1, 1].contourf(lons, lats, wspd[0,...], transform=ccrs.PlateCarree(), cmap='jet')
-   # cbar = plt.colorbar()
    axes[1, 1].set_title('wind Speed')
    axes[1, 1].coastlines()
    gl=axes[1, 1].gridlines(crs=ccrs.PlateCarree(),draw_labels=True,color='black',alpha=0.5,linestyle='--')
