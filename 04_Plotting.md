@@ -265,7 +265,7 @@
    ds.close()
    ```
 7. Overlying between the Precipitation and the Wind Speed
-   <img width="1000" height="1000" alt="image" src="https://github.com/user-attachments/assets/7c4e28ac-9211-49ed-8cc3-b584ba6d45e8" />
+   <img width="1000" height="1000" alt="image" src="https://github.com/user-attachments/assets/d6b1199a-36b9-44f1-98e6-2f5da9da2c8c" />
 
    Create a file plot7.py with this example:
    ```console
@@ -308,13 +308,14 @@
    
    # Add the latitude and longitude grid
    gl = ax.gridlines(crs=proj, draw_labels=True,
-                  linewidth=1, color='gray', alpha=0.5, linestyle='--')
+                     linewidth=1, color='gray', alpha=0.5, linestyle='--')
    gl.top_labels = False
    gl.right_labels = False
    
    # Add the precipitation
    cs=ax.contourf(ds.XLONG.values[0],ds.XLAT.values[0], prec[0,...], transform=ccrs.PlateCarree(), cmap='Blues')
-   plt.colorbar(cs)
+   cb=plt.colorbar(cs)
+   cb.ax.set_xlabel('Prec. (mm)')
    
    # Overlying with the wind vectors
    new_x, new_y, new_u, new_v,c = vector_scalar_to_grid(proj,proj,15,ds.XLONG.values,ds.XLAT.values,u_wind,v_wind, wind_speed)
