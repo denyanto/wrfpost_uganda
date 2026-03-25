@@ -103,7 +103,8 @@ Here's how you can create panel plots in Python:
     import numpy as np
     import wrf, glob
     from mpl_toolkits.axes_grid1 import make_axes_locatable
-    
+
+    # Read data
     file_list = sorted(glob.glob("wrfoutput/wrfout_d01_*"))  # Replace with your file path
     ncfile = [Dataset(f) for f in file_list]
     times = wrf.getvar(ncfile, "times", timeidx=wrf.ALL_TIMES)
@@ -123,11 +124,15 @@ Here's how you can create panel plots in Python:
     rain = wrf.getvar(ncfile, 'RAINC', timeidx=wrf.ALL_TIMES)+wrf.getvar(ncfile, 'RAINNC', timeidx=wrf.ALL_TIMES)
     lats, lons = wrf.latlon_coords(slp)
     levels = np.arange(1000, 99, -50)
+
+    # Filling the certain location longitude and latititude
     point = [106.99, -7.41]
-    
+   
+    # Finding the point location
     iy = np.nanargmin(np.abs(lats[:,0] - point[1]))
     ix = np.nanargmin(np.abs(lons[0,:] - point[0]))
-    
+   
+    # Calculating the interpolation vertical levels
     rh_interp = [];t_interp = [];u_interp = [];v_interp = []
     for lev in levels:
         rh_lev = wrf.interplevel(rh, p, lev)
@@ -142,6 +147,8 @@ Here's how you can create panel plots in Python:
     t_interp = np.array(t_interp)
     u_interp = np.array(u_interp)
     v_interp = np.array(v_interp)
+
+    # Getting the point data
     irh=rh_interp[:,:,iy,ix]
     it=t_interp[:,:,iy,ix]
     iu=u_interp[:,:,iy,ix]
@@ -156,7 +163,8 @@ Here's how you can create panel plots in Python:
     icf=cf[:,:,iy,ix]*100
     irain=np.array(rain[:,iy,ix])
     irain[1:]=irain[1:]-irain[:-1]
-    
+   
+    # Plotting a Meteogram
     fig, axes = plt.subplots(7, 1, figsize=(8,10),gridspec_kw={'height_ratios': [6, 1, 1, 1, 1, 1, 1]}, layout='constrained')
     cs=axes[0].contourf(times,levels,irh,cmap='Greens')
     cx=axes[0].contour(times,levels,it)
@@ -207,6 +215,7 @@ Here's how you can create panel plots in Python:
     axes[6].minorticks_on()
     axes[6].set_ylim(0, round(irain.max()))
     wkt=[str(wrf.to_np(i))[0:-16] for i in times]
-    axes[6].set_xticklabels(wkt, rotation=60) 
+    axes[6].set_xticklabels(wkt, rotation=60)
+    # Saving the figure
     plt.savefig('plot22.png')
    ````
