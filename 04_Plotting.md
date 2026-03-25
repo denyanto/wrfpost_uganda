@@ -265,6 +265,9 @@
    ds.close()
    ```
 7. Overlying between the Precipitation and the Wind Speed
+   <img width="1000" height="1000" alt="image" src="https://github.com/user-attachments/assets/7c4e28ac-9211-49ed-8cc3-b584ba6d45e8" />
+
+   Create a file plot7.py with this example:
    ```console
    import xarray as xr
    import matplotlib.pyplot as plt
