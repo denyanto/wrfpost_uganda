@@ -266,6 +266,72 @@
    ```
 7. Overlying between the Precipitation and the Wind Speed
    ```console
+   import xarray as xr
+   import matplotlib.pyplot as plt
+   import matplotlib.cm as cm
+   from matplotlib.lines import Line2D
+   import numpy as np
+   import cartopy.crs as ccrs
+   import cartopy.feature as cfeature
+   import pandas as pd
+   from cartopy.vector_transform import vector_scalar_to_grid
    
+   # Load the WRF output file
+   ds = xr.open_dataset('wrfoutput/wrfout_d01_2020-01-01_00:00:00')
+   
+   # Extract the Precipitation variables
+   prec = ds.RAINC.values + ds.RAINNC.values
+   
+   # Extract the wind speed and direction variables
+   u_wind = ds.U10.values
+   v_wind = ds.V10.values
+   
+   # Calculate the wind speed and direction
+   wind_speed = (u_wind ** 2 + v_wind ** 2) ** 0.5
+   wind_direction = 180 + (180 / np.pi) * np.arctan2(v_wind, u_wind)
+   
+   # Create a map projection
+   proj = ccrs.PlateCarree()
+   # Create a figure and axis object
+   fig, ax = plt.subplots(figsize=(10, 10), subplot_kw=dict(projection=proj))
+   
+   # Set the plot extent
+   ax.set_extent([ds.XLONG.min(), ds.XLONG.max(), ds.XLAT.min(), ds.XLAT.max()])
+   
+   # Add map features
+   ax.add_feature(cfeature.LAND, facecolor='lightgray')
+   ax.add_feature(cfeature.COASTLINE, linewidth=0.5)
+   ax.add_feature(cfeature.BORDERS, linewidth=0.5)
+   
+   # Add the latitude and longitude grid
+   gl = ax.gridlines(crs=proj, draw_labels=True,
+                  linewidth=1, color='gray', alpha=0.5, linestyle='--')
+   gl.top_labels = False
+   gl.right_labels = False
+   
+   # Add the precipitation
+   cs=ax.contourf(ds.XLONG.values[0],ds.XLAT.values[0], prec[0,...], transform=ccrs.PlateCarree(), cmap='Blues')
+   plt.colorbar(cs)
+   
+   # Overlying with the wind vectors
+   new_x, new_y, new_u, new_v,c = vector_scalar_to_grid(proj,proj,15,ds.XLONG.values,ds.XLAT.values,u_wind,v_wind, wind_speed)
+   Q=ax.quiver(new_x,new_y,new_u,new_v,c, transform=proj, regrid_shape=30, cmap='plasma', pivot='middle') 
+   qk = plt.quiverkey(Q, 0.1, 0.2, 10, r'10 m/s', labelpos='E', coordinates='figure')
+   
+   # Add a colorbar
+   cbar = fig.colorbar(Q, orientation='horizontal', fraction=0.05, pad=0.1)
+   cbar.ax.set_xlabel('Wind Speed (m/s)')
+   
+   # Create a string with the title and date information
+   title_str = f'Precipitation (shaded, mm) Wind (vector, m/s)'
+   
+   # Add a title
+   plt.title(title_str)
+   
+   # Save the plot
+   plt.savefig('plot7.png')
+   
+   # Close the file
+   ds.close()
    ```
 9. 
