@@ -91,9 +91,9 @@ Here's how you can create panel plots in Python:
    - A meteogram is a type of weather chart that shows how different weather conditions are expected to change over time at a specific location.
    - Instead of just giving a simple forecast (like “rain tomorrow”), a meteogram displays multiple weather variables together in a timeline, making it easier to see patterns and trends..
    - Why it’s useful:
-    o Gives a detailed, hour-by-hour forecast
-    o Helps with planning activities like travel, farming, or outdoor events
-    o Lets you see weather trends, not just single predictions
+     -- Gives a detailed, hour-by-hour forecast
+     -- Helps with planning activities like travel, farming, or outdoor events
+     -- Lets you see weather trends, not just single predictions
    ````console
     from netCDF4 import Dataset
     import matplotlib.pyplot as plt
