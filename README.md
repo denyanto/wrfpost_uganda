@@ -1,4 +1,4 @@
-### On the Job Training on Data Assimilation Technique in Numerical Weather Prediction (NWP) and Statistical Downscaling for Climate Prediction for the staff of the Department of Meteorology, Ministry of Water and Environment of Uganda (DoM), Jakarta, Indonesia 9 - 20 June 2025
+### On the Job Training on Data Assimilation Technique in Numerical Weather Prediction (NWP) and Statistical Downscaling for Climate Prediction for the staff of the Department of Meteorology, Ministry of Water and Environment of Uganda (DoM), Jakarta, Indonesia ~9 - 20 June 2025~ 6 - 17 April 2026
 This document contains installation steps and how to run WRF Post Processing using python. These documents are organized based on the following steps:
 
 1. Installing python
