@@ -94,6 +94,8 @@ Here's how you can create panel plots in Python:
      + Gives a detailed, hour-by-hour forecast.
      + Helps with planning activities like travel, farming, or outdoor events.
      + Lets you see weather trends, not just single predictions.
+
+   Example Creating a Meteogram:
    ````console
     from netCDF4 import Dataset
     import matplotlib.pyplot as plt
