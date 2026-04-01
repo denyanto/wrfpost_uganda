@@ -58,7 +58,7 @@
    If you have difference resolution such as:
    
    1. ERA5 data (coarse resolution, e.g., ~0.25°).
-
+   
    2. WRF output file defining the target 9 km grid.
    
    You need regridding first before implement above script.
@@ -183,6 +183,7 @@
 6. Evaluating Forecast Impact
 
    1 Compute bias before and after assimilation.
+
    2 Compare RMSE between background and analysis:
 
    ````console
