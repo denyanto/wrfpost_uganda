@@ -84,7 +84,7 @@
    ````
    You can also compute time series RMSE to evaluate forecast impact:
    ````console
-   # Suppose we have multiple time steps
+   # Suppose we have multiple-time steps
    rmse_ts = [np.sqrt(np.mean((anl[t,:,:] - obs[t,:,:])**2)) for t in range(anl.shape[0])]
    
    plt.plot(rmse_ts, marker='o')
@@ -95,4 +95,27 @@
    plt.show()
    ````
       
-5. 
+5. Evaluating Forecast Impact
+
+   1 Compute bias before and after assimilation.
+   2 Compare RMSE between background and analysis:
+
+   ````console
+   rmse_bkg = np.sqrt(np.mean((bkg - obs)**2))
+   rmse_anl = np.sqrt(np.mean((anl - obs)**2))
+   
+   print(f'Background RMSE: {rmse_bkg:.2f} K')
+   print(f'Analysis RMSE: {rmse_anl:.2f} K')
+   improvement = rmse_bkg - rmse_anl
+   print(f'RMSE Reduction after DA: {improvement:.2f} K')
+   ````
+   3 Map spatial impact:
+   ````console
+   impact = np.abs(bkg - obs) - np.abs(anl - obs)  # positive = improvement
+
+   plt.figure(figsize=(8,6))
+   plt.contourf(impact[0,:,:], cmap='RdBu_r')
+   plt.colorbar(label='RMSE Improvement (K)')
+   plt.title('Spatial Forecast Improvement After DA')
+   plt.show()
+   ````
