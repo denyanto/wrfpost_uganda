@@ -36,13 +36,13 @@
 
    4.1 Bias
 
-   Bias is the difference between observations and the background forecast:
+   Bias is the difference between observations and forecast:
 
    bias = 𝑦obs − 𝐻(𝑥𝑏)
    ````console
-   # Suppose obs and background arrays are available
+   # Suppose obs and forecast arrays are available
    obs = ds['OBS_TEMP'].values  # observations
-   bkg = ds['BKG_TEMP'].values  # background forecast
+   bkg = ds['BKG_TEMP'].values  # forecast
    
    bias = obs - bkg
    
@@ -54,9 +54,45 @@
    plt.show()
    ````
 
-   4.1 Bias
-   ````console
+   4.2 Analysis Increment
 
+   Analysis increment is the difference between analysis and background:
+
+   increment = 𝑥𝑎 − 𝑥𝑏
+
+   ````console
+   anl = ds['ANL_TEMP'].values  # analysis
+   increment = anl - bkg
+   
+   # Plot spatial map at first vertical level
+   plt.figure(figsize=(8,6))
+   plt.contourf(increment[0,:,:], cmap='RdBu_r')
+   plt.colorbar(label='Analysis Increment (K)')
+   plt.title('Temperature Analysis Increment at Level 1')
+   plt.show()
+   ````
+
+   4.3 Root Mean Square Error (RMSE)
+
+   RMSE is widely used to quantify forecast improvement:
+
+   RMSE=0.5 * (xa​−yobs​)
+
+   ````console
+   rmse = np.sqrt(np.mean((anl - obs)**2))
+   print(f'RMSE of Analysis: {rmse:.2f} K')
+   ````
+   You can also compute time series RMSE to evaluate forecast impact:
+   ````console
+   # Suppose we have multiple time steps
+   rmse_ts = [np.sqrt(np.mean((anl[t,:,:] - obs[t,:,:])**2)) for t in range(anl.shape[0])]
+   
+   plt.plot(rmse_ts, marker='o')
+   plt.xlabel('Time step')
+   plt.ylabel('RMSE (K)')
+   plt.title('RMSE Evolution Over Time')
+   plt.grid(True)
+   plt.show()
    ````
       
 5. 
