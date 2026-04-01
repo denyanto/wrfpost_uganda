@@ -8,9 +8,11 @@
 
      Python, with libraries like netCDF4, numpy, xarray, matplotlib, and cartopy, is perfect for this workflow.
 3. Required Python Libraries
+   ````console
    import numpy as np
    import netCDF4 as nc
    import xarray as xr
    import matplotlib.pyplot as plt
    import cartopy.crs as ccrs
+   ````
 5. 
