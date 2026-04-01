@@ -16,11 +16,10 @@
    import cartopy.crs as ccrs
    ````
 3. Reading WRF-DA Output
-   WRF-DA outputs include:
 
+   WRF-DA outputs include:
    - wrfinput_d01 / wrfda_output (analysis files)
    - Observation files
-
    Example using xarray:
    ````console
    # Open WRF-DA analysis output
@@ -33,4 +32,31 @@
    # Extract 3D variable, e.g., temperature at model levels
    temp = ds['T']  # K
    ````
-4. 
+4. Computing Data Assimilation Diagnostics
+
+   4.1 Bias
+
+   Bias is the difference between observations and the background forecast:
+
+   bias = 𝑦obs − 𝐻(𝑥𝑏)
+   ````console
+   # Suppose obs and background arrays are available
+   obs = ds['OBS_TEMP'].values  # observations
+   bkg = ds['BKG_TEMP'].values  # background forecast
+   
+   bias = obs - bkg
+   
+   # Example: plot histogram of innovation
+   plt.hist(bias.flatten(), bins=50, color='skyblue', edgecolor='black')
+   plt.xlabel('Bias (K)')
+   plt.ylabel('Frequency')
+   plt.title('Bias Histogram')
+   plt.show()
+   ````
+
+   4.1 Bias
+   ````console
+
+   ````
+      
+5. 
