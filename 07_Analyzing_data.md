@@ -56,6 +56,7 @@
    plt.show()
    ````
    If you have difference resolution such as:
+   
    1 ERA5 data (coarse resolution, e.g., ~0.25°).
    2 WRF output file defining the target 9 km grid.
    You need regridding first before implement above script.
