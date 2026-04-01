@@ -158,7 +158,7 @@
 
    RMSE is widely used to quantify forecast improvement:
 
-   RMSE=0.5 * (xa​−yobs​)
+   RMSE=$$\left( \sum_{k=1}^n xa​−yobs​ \right)^2$$
 
    ````console
    rmse = np.sqrt(np.mean((anl - obs)**2))
