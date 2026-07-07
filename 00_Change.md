@@ -6,7 +6,7 @@ cp -r /scratch/den/conda_env/wrfpost /home/${user}/.conda/envs
 conda activate wrfpost
 ```
 
-Create working 
+Create working folder
 ```console
 mkdir wrfpost
 cd wrfpost
