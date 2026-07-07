@@ -234,9 +234,7 @@
    ax.set_extent([ds.XLONG.min(), ds.XLONG.max(), ds.XLAT.min(), ds.XLAT.max()])
    
    # Add map features
-   ax.add_feature(cfeature.LAND, facecolor='lightgray')
    ax.add_feature(cfeature.COASTLINE, linewidth=0.5)
-   ax.add_feature(cfeature.BORDERS, linewidth=0.5)
    
    # Add the latitude and longitude grid
    gl = ax.gridlines(crs=proj, draw_labels=True,
@@ -302,9 +300,7 @@
    ax.set_extent([ds.XLONG.min(), ds.XLONG.max(), ds.XLAT.min(), ds.XLAT.max()])
    
    # Add map features
-   ax.add_feature(cfeature.LAND, facecolor='lightgray')
    ax.add_feature(cfeature.COASTLINE, linewidth=0.5)
-   ax.add_feature(cfeature.BORDERS, linewidth=0.5)
    
    # Add the latitude and longitude grid
    gl = ax.gridlines(crs=proj, draw_labels=True,
@@ -313,7 +309,7 @@
    gl.right_labels = False
    
    # Add the precipitation
-   cs=ax.contourf(ds.XLONG.values[0],ds.XLAT.values[0], prec[0,...], transform=ccrs.PlateCarree(), cmap='Blues')
+   cs=ax.contourf(ds.XLONG.values[0],ds.XLAT.values[0], prec[8,...], transform=ccrs.PlateCarree(), cmap='Blues')
    cb=plt.colorbar(cs)
    cb.ax.set_xlabel('Prec. (mm)')
    
