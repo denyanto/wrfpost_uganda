@@ -1,6 +1,13 @@
-To change your Conda repository configuration from Anaconda defaults to conda-forge, run the following commands in your terminal or Anaconda Prompt:
+To change your Conda repository configuration from Anaconda defaults to conda-forge, run the following commands in your terminal or Anaconda Prompt::
 
 ```console
-conda config --add channels conda-forge
-conda config --set channel_priority strict
+user=ict-10
+cp -r /scratch/den/conda_env/wrfpost /home/${user}/.conda/envs
+conda activate wrfpost
+```
+
+Create working 
+```console
+mkdir wrfpost
+cd wrfpost
 ```
