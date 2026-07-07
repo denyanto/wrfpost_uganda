@@ -31,6 +31,7 @@ To change your Conda repository configuration from Anaconda defaults to conda-fo
 ```console
 user=ict-10
 cp -r /scratch/den/conda_env/wrfpost /home/${user}/.conda/envs
+cp -r /scratch/den/conda_env/cartopy /home/${user}/.local/share
 ml restore intel
 conda activate wrfpost
 ```
