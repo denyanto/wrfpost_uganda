@@ -11,3 +11,8 @@ Create working folder
 mkdir wrfpost
 cd wrfpost
 ```
+
+Identify your wrf output
+```console
+ln -sf /scratch/wido/uganda/wrfout_d01_2026-04-01_00:00:00 .
+```
