@@ -26,7 +26,7 @@ You have accesses your hpc.
 
 <img width="482" height="321" alt="image" src="https://github.com/user-attachments/assets/fe74544a-d77c-4265-9708-184ef1ecf176" />
 
-To change your Conda repository configuration from Anaconda defaults to conda-forge, run the following commands in your terminal or Anaconda Prompt::
+To change your Conda configuration, run the following commands in your terminal or Anaconda Prompt::
 
 ```console
 user=ict-10
