@@ -1,5 +1,6 @@
 First update your .bashrc to allow your winscp application.
 ```console
+user=ict-10
 vi /home/${user}/.bashrc
 ```
 Add the new line with:
