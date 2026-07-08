@@ -1,12 +1,12 @@
 # Basic Python
 1. Python Syntax.
 
-   Python syntax can be executed by writing directly in the Command Line:
+   Python syntax can be executed by writing directly in the Python Command Line:
    ```console
    >>> print("Hello, Everyone!")
    Hello, Everyone!
    ```
-   Or by creating a python file on the server, using the .py file extension, and running it in the Command Line:
+   Or by creating a python file on the server, using the .py file extension, and running it in the Linux Command Line:
    ```console
    >> python myfile.py
    ```
