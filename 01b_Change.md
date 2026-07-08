@@ -31,7 +31,7 @@ To change your Conda configuration, run the following commands in your terminal 
 
 ```console
 user=ict-10
-cp -r /scratch/den/conda_env/wrfpost /home/${user}/.conda/envs
+cp -r /scratch/den/conda_env/wrfpost /home/${user}/.conda/envs/wrfpost
 cp -r /scratch/den/conda_env/cartopy /home/${user}/.local/share
 source /software/compilers/intel-oneapi/2025.2.1/setvars.sh
 conda activate wrfpost
